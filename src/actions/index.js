@@ -16,10 +16,11 @@ export const fieldChange = (field, value) => (
 );
 
 export const LABEL_CHANGE = 'LABEL_CHANGE';
-export const labelChange = (field, value) => (
+export const labelChange = (field, value, notes) => (
     {
         type: LABEL_CHANGE,
         field,
         value,
+        notes,
     }
 );

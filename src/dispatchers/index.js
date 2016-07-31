@@ -6,6 +6,6 @@ export const expandChange = field =>
 export const fieldChange = (field, value) =>
     dispatch => dispatch(actions.fieldChange(field, value));
 
-export const labelChange = (field, value) =>
-    dispatch => dispatch(actions.labelChange(field, value));
+export const labelChange = (field, value, notes) =>
+    dispatch => dispatch(actions.labelChange(field, value, notes));
 

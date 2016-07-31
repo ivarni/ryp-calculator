@@ -28,8 +28,8 @@ class RypForm extends Component {
         this.props.fieldChange(field, Number(value));
     }
 
-    onLabelChange(field, value) {
-        this.props.labelChange(field, value);
+    onLabelChange(field, value, notes) {
+        this.props.labelChange(field, value, notes);
     }
 
     renderField(key) {
@@ -47,6 +47,7 @@ class RypForm extends Component {
               onExpandChange={this.onExpandChange}
               onValueChange={this.onValueChange}
               onLabelChange={this.onLabelChange}
+              notes={exercise.notes}
             />
         );
     }

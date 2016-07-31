@@ -60,7 +60,8 @@ class RypField extends Component {
 
     onLabelChange() {
         const { name, value } = findDOMNode(this.refs.input).querySelector('input');
-        this.props.onLabelChange(name, value);
+        const { value: notes } = findDOMNode(this.refs.notes).querySelector('input');
+        this.props.onLabelChange(name, value, notes);
         this.onClose();
     }
 
@@ -70,6 +71,7 @@ class RypField extends Component {
             fieldName,
             fieldLabel,
             fieldValue,
+            notes,
         } = this.props;
 
         const {
@@ -102,9 +104,11 @@ class RypField extends Component {
                       actAsExpander
                       showExpandableButton
                     />
-                    <CardText>
-                        Noe tekst her...
-                    </CardText>
+                    {notes &&
+                        <CardText expandable>
+                            {notes}
+                        </CardText>
+                    }
                     <CardActions expandable>
                         <FlatButton
                           label="Endre vekt"
@@ -132,6 +136,13 @@ class RypField extends Component {
                       ref="input"
                       type="tel"
                     />
+                    {editLabel &&
+                        <TextField
+                          defaultValue={notes}
+                          floatingLabelText="Notater"
+                          ref="notes"
+                        />
+                    }
                 </Dialog>
             </div>
         );
@@ -146,6 +157,7 @@ RypField.propTypes = {
     onExpandChange: PropTypes.func.isRequired,
     onValueChange: PropTypes.func.isRequired,
     onLabelChange: PropTypes.func.isRequired,
+    notes: PropTypes.string.isRequired,
 };
 
 export default RypField;
