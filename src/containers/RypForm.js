@@ -3,20 +3,28 @@ import { connect } from 'react-redux';
 import RypField from '~/components/RypField';
 
 import {
+    expandChange,
     fieldChange,
+    fieldEdit,
     labelChange,
+    labelEdit,
 } from '~/dispatchers';
 
 class RypForm extends Component {
 
     constructor() {
         super();
-        this.onFieldChange = this.onFieldChange.bind(this);
+        this.onExpandChange = this.onExpandChange.bind(this);
         this.onLabelChange = this.onLabelChange.bind(this);
+        this.onValueChange = this.onValueChange.bind(this);
         this.renderField = this.renderField.bind(this);
     }
 
-    onFieldChange(field, value) {
+    onExpandChange(field) {
+        this.props.expandChange(field);
+    }
+
+    onValueChange(field, value) {
         this.props.fieldChange(field, Number(value));
     }
 
@@ -29,11 +37,15 @@ class RypForm extends Component {
 
         return (
             <RypField
-              key={key}
+              editLabel={this.onEditLabel}
+              editValue={this.onEditValue}
+              expanded={exercise.expanded}
               fieldName={key}
               fieldLabel={exercise.label}
               fieldValue={exercise.value}
-              onFieldChange={this.onFieldChange}
+              key={key}
+              onExpandChange={this.onExpandChange}
+              onValueChange={this.onValueChange}
               onLabelChange={this.onLabelChange}
             />
         );
@@ -53,6 +65,7 @@ class RypForm extends Component {
 
 RypForm.propTypes = {
     exercises: PropTypes.object.isRequired,
+    expandChange: PropTypes.func.isRequired,
     fieldChange: PropTypes.func.isRequired,
     labelChange: PropTypes.func.isRequired,
 };
@@ -65,6 +78,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
+    expandChange,
     fieldChange,
+    fieldEdit,
     labelChange,
+    labelEdit,
 })(RypForm);

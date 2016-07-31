@@ -1,3 +1,4 @@
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -8,16 +9,18 @@ function App(props) {
     const { children } = props;
 
     return (
-        <div>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/ryp">Ryp</Link>
-                    </li>
-                </ul>
-            </nav>
-            {children}
-        </div>
+        <MuiThemeProvider>
+            <div>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/ryp">Ryp</Link>
+                        </li>
+                    </ul>
+                </nav>
+                {children}
+            </div>
+        </MuiThemeProvider>
     );
 }
 

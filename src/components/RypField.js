@@ -1,97 +1,150 @@
 import React, { Component, PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
+
+import {
+    Card,
+    CardActions,
+    CardHeader,
+    CardText,
+} from 'material-ui/Card';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 class RypField extends Component {
 
     constructor(props) {
         super(props);
-        this.onEdit = this.onEdit.bind(this);
-        this.onFieldChange = this.onFieldChange.bind(this);
+        this.onEditLabel = this.onEditLabel.bind(this);
+        this.onEditValue = this.onEditValue.bind(this);
+        this.onExpandChange = this.onExpandChange.bind(this);
+        this.onValueChange = this.onValueChange.bind(this);
         this.onLabelChange = this.onLabelChange.bind(this);
+        this.onClose = this.onClose.bind(this);
         this.state = {
-            editing: false,
+            editLabel: false,
+            editValue: false,
         };
     }
 
-    onEdit(e) {
-        e.preventDefault();
+    onEditLabel() {
         this.setState({
-            editing: !this.state.editing,
+            editLabel: true,
+            editValue: false,
         });
     }
 
-    onFieldChange(e) {
-        const {
-            target: { name, value },
-        } = e;
-        this.props.onFieldChange(name, value);
+    onEditValue() {
+        this.setState({
+            editLabel: false,
+            editValue: true,
+        });
     }
 
-    onLabelChange(e) {
-        const {
-            target: { name, value },
-        } = e;
-        this.props.onLabelChange(name.substring(0, name.length - 5), value);
+    onExpandChange() {
+        this.props.onExpandChange(this.props.fieldName);
+    }
+
+    onClose() {
+        this.setState({
+            editLabel: false,
+            editValue: false,
+        });
+    }
+
+    onValueChange() {
+        const { name, value } = findDOMNode(this.refs.input).querySelector('input');
+        this.props.onValueChange(name, value);
+        this.onClose();
+    }
+
+    onLabelChange() {
+        const { name, value } = findDOMNode(this.refs.input).querySelector('input');
+        this.props.onLabelChange(name, value);
+        this.onClose();
     }
 
     render() {
         const {
+            expanded,
             fieldName,
             fieldLabel,
             fieldValue,
         } = this.props;
 
-        const { editing } = this.state;
+        const {
+            editLabel,
+            editValue,
+        } = this.state;
+
+        const actions = [
+            <FlatButton
+              label="Lagre"
+              primary
+              onTouchTap={editLabel ? this.onLabelChange : this.onValueChange}
+            />,
+            <FlatButton
+              label="Avbryt"
+              secondary
+              onTouchTap={this.onClose}
+            />,
+        ];
 
         return (
-            <div className="ryp-field">
-                {editing &&
-                    <input
-                      name={`${fieldName}-edit`}
-                      onChange={this.onLabelChange}
-                      type="text"
-                      value={fieldLabel}
+            <div>
+                <Card
+                  expanded={expanded}
+                  onExpandChange={this.onExpandChange}
+                >
+                    <CardHeader
+                      title={fieldLabel}
+                      subtitle={`${fieldValue} kg`}
+                      actAsExpander
+                      showExpandableButton
                     />
-                }
-                {!editing &&
-                    <label htmlFor={fieldName}>
-                        {fieldLabel}
-                    </label>
-                }
-                <a href="">
-                    <svg
-                      fill="#000000"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      width="24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      onClick={this.onEdit}
-                    >
-                        <path
-                          d={`M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3
-                                17.25zM20.71 7.04c.39-.39.39-1.02
-                                0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41
-                                0l-1.83 1.83 3.75 3.75 1.83-1.83z`}
+                    <CardText>
+                        Noe tekst her...
+                    </CardText>
+                    <CardActions expandable>
+                        <FlatButton
+                          label="Endre vekt"
+                          onTouchTap={this.onEditValue}
+                          primary
                         />
-                        <path d="M0 0h24v24H0z" fill="none" />
-                    </svg>
-                </a>
-                <input
-                  name={fieldName}
-                  onChange={this.onFieldChange}
-                  type="tel"
-                  value={fieldValue || ''}
-                />
+                        <FlatButton
+                          label="Endre øvelse"
+                          onTouchTap={this.onEditLabel}
+                          secondary
+                        />
+                    </CardActions>
+                </Card>
+                <Dialog
+                  actions={actions}
+                  modal={false}
+                  onRequestClose={this.onClose}
+                  open={editValue || editLabel}
+                  title={editLabel ? 'Endre øvelse' : 'Endre vekt'}
+                >
+                    <TextField
+                      defaultValue={editLabel ? fieldLabel : (fieldValue || '')}
+                      id="input"
+                      name={fieldName}
+                      ref="input"
+                      type="tel"
+                    />
+                </Dialog>
             </div>
         );
     }
-
 }
 
 RypField.propTypes = {
+    expanded: PropTypes.bool.isRequired,
     fieldLabel: PropTypes.string.isRequired,
     fieldName: PropTypes.string.isRequired,
     fieldValue: PropTypes.number,
-    onFieldChange: PropTypes.func.isRequired,
+    onExpandChange: PropTypes.func.isRequired,
+    onValueChange: PropTypes.func.isRequired,
     onLabelChange: PropTypes.func.isRequired,
 };
 

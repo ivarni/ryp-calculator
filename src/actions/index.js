@@ -1,3 +1,11 @@
+export const EXPAND_CHANGE = 'EXPAND_CHANGE';
+export const expandChange = field => (
+    {
+        type: EXPAND_CHANGE,
+        field,
+    }
+);
+
 export const FIELD_CHANGE = 'FIELD_CHANGE';
 export const fieldChange = (field, value) => (
     {
