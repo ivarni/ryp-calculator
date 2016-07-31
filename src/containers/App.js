@@ -1,25 +1,24 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
 import '~/styles/styles.less';
 
-class App extends Component {
+function App(props) {
+    const { children } = props;
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const { children } = this.props;
-
-        return (
-            <div>
-                {children}
-            </div>
-        );
-    }
-
+    return (
+        <div>
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/ryp">Ryp</Link>
+                    </li>
+                </ul>
+            </nav>
+            {children}
+        </div>
+    );
 }
 
 App.propTypes = {
@@ -27,7 +26,7 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return {};
+    return state;
 }
 
 export default connect(mapStateToProps, {

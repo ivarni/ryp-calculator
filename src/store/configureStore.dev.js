@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import {
     createStore,
     applyMiddleware,
@@ -6,9 +7,7 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import api from '~/middleware/api';
 import rootReducer from '~/reducers';
-import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 
 import DevTools from '~/containers/DevTools';
@@ -18,14 +17,12 @@ export default function configureStore(preloadedState) {
     const store = createStore(
         combineReducers({
             app: rootReducer,
-            form: formReducer,
             routing: routerReducer,
         }),
         preloadedState,
         compose(
             applyMiddleware(
                 thunk,
-//                api,
                 createLogger()
             ),
             DevTools.instrument()
@@ -41,3 +38,4 @@ export default function configureStore(preloadedState) {
 
     return store;
 }
+/* eslint-enable global-require */
