@@ -1,7 +1,7 @@
 const getConfig = require('hjs-webpack')
 
 
-module.exports = getConfig({
+const config = getConfig({
     // entry point for the app
     in: 'src/app.js',
 
@@ -35,3 +35,10 @@ module.exports = getConfig({
     // false by default
     clearBeforeBuild: true
 });
+
+// Better sourcemaps
+if (process.env.NODE_ENV !== 'production') {
+    config.devtool = 'source-map';
+}
+
+module.exports = config;
