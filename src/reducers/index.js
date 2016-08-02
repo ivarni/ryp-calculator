@@ -7,43 +7,43 @@ const defaultExercises = {
         expanded: false,
         notes: '',
         label: 'Knebøy',
-        value: 0,
+        value: 100,
     },
     benchpress: {
         expanded: false,
         notes: '',
         label: 'Skråbenk, manualer',
-        value: 0,
+        value: 100,
     },
     row: {
         expanded: false,
         notes: '',
         label: 'Roing, bredt grep',
-        value: 0,
+        value: 100,
     },
     arnold: {
         expanded: false,
         notes: '',
         label: 'Arnoldpress',
-        value: 0,
+        value: 100,
     },
     biceps: {
         expanded: false,
         notes: '',
         label: 'Bicepscurl',
-        value: 0,
+        value: 100,
     },
     triceps: {
         expanded: false,
         notes: '',
         label: 'Tricepspress',
-        value: 0,
+        value: 100,
     },
     abs: {
         expanded: false,
         notes: '',
         label: 'Mage',
-        value: 0,
+        value: 100,
     },
 };
 
@@ -85,6 +85,8 @@ const updateExerciseLabel = (state, action) => {
 
 const exercises = (state = defaultExercises, action) => {
     switch (action.type) {
+        case actions.CALCULATE:
+            return calculate(state);
         case actions.EXPAND_CHANGE:
             return expandChange(state, action);
         case actions.FIELD_CHANGE:

@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+
+import RaisedButton from 'material-ui/RaisedButton';
+
 import RypField from '~/components/RypField';
 
 import {
@@ -18,6 +21,10 @@ class RypForm extends Component {
         this.onLabelChange = this.onLabelChange.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.renderField = this.renderField.bind(this);
+
+        this.buttonStyle = {
+            marginTop: 20,
+        };
     }
 
     onExpandChange(field) {
@@ -72,7 +79,8 @@ RypForm.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { app: { exercises } } = state;
+    const exercises = state.app.exercises;
+
     return {
         exercises,
     };
