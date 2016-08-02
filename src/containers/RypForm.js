@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import RaisedButton from 'material-ui/RaisedButton';
-
 import RypField from '~/components/RypField';
 
 import {
@@ -25,10 +23,16 @@ class RypForm extends Component {
         this.buttonStyle = {
             marginTop: 20,
         };
+
+        this.state = {
+            expanded: null,
+        };
     }
 
     onExpandChange(field) {
-        this.props.expandChange(field);
+        this.setState({
+            expanded: field,
+        });
     }
 
     onValueChange(field, value) {
@@ -39,18 +43,16 @@ class RypForm extends Component {
         this.props.labelChange(field, value, notes);
     }
 
-    renderField(key) {
-        const exercise = this.props.exercises[key];
-
+    renderField(exercise) {
         return (
             <RypField
               editLabel={this.onEditLabel}
               editValue={this.onEditValue}
-              expanded={exercise.expanded}
-              fieldName={key}
+              expanded={exercise.name === this.state.expanded}
+              fieldName={exercise.name}
               fieldLabel={exercise.label}
               fieldValue={exercise.value}
-              key={key}
+              key={exercise.name}
               onExpandChange={this.onExpandChange}
               onValueChange={this.onValueChange}
               onLabelChange={this.onLabelChange}
@@ -64,7 +66,7 @@ class RypForm extends Component {
 
         return (
             <form>
-                {Object.keys(exercises).map(this.renderField)}
+                {exercises.map(this.renderField)}
             </form>
         );
     }
@@ -72,7 +74,7 @@ class RypForm extends Component {
 }
 
 RypForm.propTypes = {
-    exercises: PropTypes.object.isRequired,
+    exercises: PropTypes.array.isRequired,
     expandChange: PropTypes.func.isRequired,
     fieldChange: PropTypes.func.isRequired,
     labelChange: PropTypes.func.isRequired,

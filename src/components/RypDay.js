@@ -1,33 +1,29 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import formulas from '~/formula';
 
 function getDay(day, exercises) {
     const formula = formulas[day];
-    const result = {};
-    Object.keys(exercises).forEach(name => {
-        result[name] = {};
-        Object.keys(exercises[name]).forEach(key => {
-            result[name] = { ...exercises[name]};
-            result[name].value *= formula.multiplier;
-            result[name].sets = formula.sets[name];
-        });
-    });
-    return { ...result, title: formula.reps };
+    return exercises.map(exercise => ({
+        ...exercise,
+        value: exercise.value * formula.multiplier,
+    }));
 }
 
-class RypDay extends Component {
+function RypDay(props) {
+    const { day, exercises } = props;
+    const result = getDay(day, exercises);
 
-    render() {
-        const { day, exercises } = this.props;
-
-        const result = getDay(day, exercises);
-
-        return (
-            <pre>{JSON.stringify(result, null ,2)}</pre>
-        );
-    }
-
+    return (
+        <div>
+            <pre>{JSON.stringify(result[0], null, 2)}</pre>
+        </div>
+    );
 }
+
+RypDay.propTypes = {
+    exercises: PropTypes.array.isRequired,
+    day: PropTypes.number.isRequired,
+};
 
 export default RypDay;

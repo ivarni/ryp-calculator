@@ -251,7 +251,7 @@ const formula = [
             biceps: 2,
             triceps: 2,
         },
-    }
+    },
 ];
 
 export default formula;
