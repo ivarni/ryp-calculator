@@ -3,7 +3,7 @@ const formula = [
     {
         day: 1,
         multiplier: 0.8,
-        reps: '12',
+        title: 'Dag 1, 12 reps',
         sets: {
             squats: 3,
             benchpress: 2,
@@ -17,7 +17,7 @@ const formula = [
     {
         day: 2,
         multiplier: 0.85,
-        reps: '12',
+        title: 'Dag 2, 12 reps',
         sets: {
             squats: 3,
             benchpress: 2,
@@ -31,7 +31,7 @@ const formula = [
     {
         day: 3,
         multiplier: 0.9,
-        reps: '12',
+        title: 'Dag 3, 12 reps',
         sets: {
             squats: 3,
             benchpress: 2,
@@ -45,7 +45,7 @@ const formula = [
     {
         day: 4,
         multiplier: 0.95,
-        reps: '8',
+        title: 'Dag 4, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -59,7 +59,7 @@ const formula = [
     {
         day: 5,
         multiplier: 0.975,
-        reps: '8',
+        title: 'Dag 5, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -73,7 +73,7 @@ const formula = [
     {
         day: 6,
         multiplier: 1,
-        reps: '8',
+        title: 'Dag 6, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -87,7 +87,7 @@ const formula = [
     {
         day: 7,
         multiplier: 1.025,
-        reps: '8',
+        title: 'Dag 7, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -101,7 +101,7 @@ const formula = [
     {
         day: 8,
         multiplier: 1.05,
-        reps: '8',
+        title: 'Dag 8, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -115,7 +115,7 @@ const formula = [
     {
         day: 9,
         multiplier: 1.075,
-        reps: '8',
+        title: 'Dag 9, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -129,7 +129,7 @@ const formula = [
     {
         day: 10,
         multiplier: 1.1,
-        reps: '8',
+        title: 'Dag 10, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -143,7 +143,7 @@ const formula = [
     {
         day: 11,
         multiplier: 1.125,
-        reps: '8',
+        title: 'Dag 11, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -157,7 +157,7 @@ const formula = [
     {
         day: 12,
         multiplier: 1.15,
-        reps: '8',
+        title: 'Dag 12, 8 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -171,7 +171,7 @@ const formula = [
     {
         day: 13,
         multiplier: 1.3,
-        reps: '4+1',
+        title: 'Dag 13, 4+1 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -185,7 +185,7 @@ const formula = [
     {
         day: 14,
         multiplier: 1.318,
-        reps: '4+1',
+        title: 'Dag 14, 4+1 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -199,7 +199,7 @@ const formula = [
     {
         day: 15,
         multiplier: 1.336,
-        reps: '4+1',
+        title: 'Dag 15, 4+1 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -213,7 +213,7 @@ const formula = [
     {
         day: 16,
         multiplier: 1.354,
-        reps: '4+1',
+        title: 'Dag 16, 4+1 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -227,7 +227,7 @@ const formula = [
     {
         day: 17,
         multiplier: 1.372,
-        reps: '4+1',
+        title: 'Dag 17, 4+1 reps',
         sets: {
             squats: 3,
             benchpress: 3,
@@ -241,7 +241,7 @@ const formula = [
     {
         day: 18,
         multiplier: 1.39,
-        reps: '4+1',
+        title: 'Dag 18, 4+1 reps',
         sets: {
             squats: 3,
             benchpress: 3,

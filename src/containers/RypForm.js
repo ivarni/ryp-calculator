@@ -15,14 +15,11 @@ class RypForm extends Component {
 
     constructor() {
         super();
+
         this.onExpandChange = this.onExpandChange.bind(this);
         this.onLabelChange = this.onLabelChange.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.renderField = this.renderField.bind(this);
-
-        this.buttonStyle = {
-            marginTop: 20,
-        };
 
         this.state = {
             expanded: null,

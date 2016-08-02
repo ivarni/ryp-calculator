@@ -23,7 +23,7 @@ class RypResult extends Component {
     render() {
         return (
             <div>
-                {Array(3).fill(null).map(this.renderDay)}
+                {Array(18).fill(null).map(this.renderDay)}
             </div>
         );
     }
