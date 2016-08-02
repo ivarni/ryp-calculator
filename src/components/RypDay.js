@@ -13,7 +13,7 @@ function getDay(day, exercises) {
     const formula = formulas[day];
     return exercises.map(exercise => ({
         ...exercise,
-        value: exercise.value * formula.multiplier,
+        value: (exercise.value * formula.multiplier).toFixed(1),
         sets: formula.sets[exercise.name],
     }));
 }
