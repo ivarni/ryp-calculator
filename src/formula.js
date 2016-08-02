@@ -1,9 +1,10 @@
-const formula = {
+const formula = [
 
-    1: {
+    {
+        day: 1,
         multiplier: 0.8,
         reps: '12',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 2,
             row: 2,
@@ -13,10 +14,11 @@ const formula = {
             triceps: 2,
         },
     },
-    2: {
+    {
+        day: 2,
         multiplier: 0.85,
         reps: '12',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 2,
             row: 2,
@@ -26,10 +28,11 @@ const formula = {
             triceps: 2,
         },
     },
-    3: {
+    {
+        day: 3,
         multiplier: 0.9,
         reps: '12',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 2,
             row: 2,
@@ -39,10 +42,11 @@ const formula = {
             triceps: 2,
         },
     },
-    4: {
+    {
+        day: 4,
         multiplier: 0.95,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -52,10 +56,11 @@ const formula = {
             triceps: 2,
         },
     },
-    5: {
+    {
+        day: 5,
         multiplier: 0.975,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -65,10 +70,11 @@ const formula = {
             triceps: 2,
         },
     },
-    6: {
+    {
+        day: 6,
         multiplier: 1,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -78,10 +84,11 @@ const formula = {
             triceps: 2,
         },
     },
-    7: {
+    {
+        day: 7,
         multiplier: 1.025,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -91,10 +98,11 @@ const formula = {
             triceps: 2,
         },
     },
-    8: {
+    {
+        day: 8,
         multiplier: 1.05,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -104,10 +112,11 @@ const formula = {
             triceps: 2,
         },
     },
-    9: {
+    {
+        day: 9,
         multiplier: 1.075,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -117,10 +126,11 @@ const formula = {
             triceps: 2,
         },
     },
-    10: {
+    {
+        day: 10,
         multiplier: 1.1,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -130,10 +140,11 @@ const formula = {
             triceps: 2,
         },
     },
-    11: {
+    {
+        day: 11,
         multiplier: 1.125,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -143,10 +154,11 @@ const formula = {
             triceps: 2,
         },
     },
-    12: {
+    {
+        day: 12,
         multiplier: 1.15,
         reps: '8',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -156,10 +168,11 @@ const formula = {
             triceps: 2,
         },
     },
-    13: {
+    {
+        day: 13,
         multiplier: 1.3,
         reps: '4+1',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -169,10 +182,11 @@ const formula = {
             triceps: 2,
         },
     },
-    14: {
+    {
+        day: 14,
         multiplier: 1.318,
         reps: '4+1',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -182,10 +196,11 @@ const formula = {
             triceps: 2,
         },
     },
-    15: {
+    {
+        day: 15,
         multiplier: 1.336,
         reps: '4+1',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -195,10 +210,11 @@ const formula = {
             triceps: 2,
         },
     },
-    16: {
+    {
+        day: 16,
         multiplier: 1.354,
         reps: '4+1',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -208,10 +224,11 @@ const formula = {
             triceps: 2,
         },
     },
-    17: {
+    {
+        day: 17,
         multiplier: 1.372,
         reps: '4+1',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -221,10 +238,11 @@ const formula = {
             triceps: 2,
         },
     },
-    18: {
+    {
+        day: 18,
         multiplier: 1.39,
         reps: '4+1',
-        set: {
+        sets: {
             squats: 3,
             benchpress: 3,
             row: 3,
@@ -234,6 +252,6 @@ const formula = {
             triceps: 2,
         },
     }
-}
+];
 
 export default formula;

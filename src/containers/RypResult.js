@@ -2,22 +2,30 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import formula from '~/formula';
+import RypDay from '~/components/RypDay';
 
 class RypResult extends Component {
 
-    renderDay(day) {
+    constructor(props) {
+        super(props);
+        this.renderDay = this.renderDay.bind(this);
+    }
+
+    renderDay(day, index) {
         return (
-            <p>{day.title || 'blah'}</p>
+            <RypDay
+                exercises={this.props.exercises}
+                day={index}
+            />
         );
     }
 
     render() {
-        const { days } = this.props;
+        const { exercises } = this.props;
 
         return (
             <div>
-                {days.map(this.renderDay)}
+                {Array(2).fill(null).map(this.renderDay)}
             </div>
         );
     }
@@ -34,7 +42,7 @@ RypResult.propTypes = {
 - So it follows.. use normalizr?
 - No, compose selectors with one that just picks out the exercise value
 */
-debugger;
+
 
 const getExercises = state => state.app.exercises;
 const getFormula = (state, day) => formula[day];
@@ -48,10 +56,9 @@ const getDayExercise = createSelector(
 )
 
 function mapStateToProps(state) {
-    const days = Array(2).fill({}).map((e,i) => {
-        return getDayExercise(state, i + 1);
-    });
-    return { days };
+    return {
+        exercises: state.app.exercises,
+    };
 }
 
 export default connect(mapStateToProps, {
