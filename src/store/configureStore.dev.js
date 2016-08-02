@@ -15,10 +15,7 @@ import DevTools from '~/containers/DevTools';
 
 export default function configureStore(preloadedState) {
     const store = createStore(
-        combineReducers({
-            app: rootReducer,
-            routing: routerReducer,
-        }),
+        rootReducer,
         preloadedState,
         compose(
             applyMiddleware(

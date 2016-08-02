@@ -78,7 +78,7 @@ RypForm.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const exercises = state.app.exercises;
+    const exercises = state.exercises;
 
     return {
         exercises,

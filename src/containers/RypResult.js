@@ -35,7 +35,7 @@ RypResult.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        exercises: state.app.exercises,
+        exercises: state.exercises,
     };
 }
 
