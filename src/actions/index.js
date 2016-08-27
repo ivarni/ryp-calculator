@@ -16,3 +16,12 @@ export const labelChange = (field, value, notes) => (
         notes,
     }
 );
+
+export const EXERCISE_FINISHED = 'EXERCISE_FINISHED';
+export const exerciseFinished = (day, name) => (
+    {
+        type: EXERCISE_FINISHED,
+        day,
+        name,
+    }
+)

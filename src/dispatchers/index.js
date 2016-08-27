@@ -9,3 +9,5 @@ export const fieldChange = (field, value) =>
 export const labelChange = (field, value, notes) =>
     dispatch => dispatch(actions.labelChange(field, value, notes));
 
+export const onFinished = (day, name) =>
+    dispatch => dispatch(actions.exerciseFinished(day, name));
