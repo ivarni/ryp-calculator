@@ -3,8 +3,8 @@ import { defaultExercises } from './exercises';
 import formulas from '../formula';
 
 const days = [];
-for (let i = 1, l = 18; i <= l; i++) {
-    days[i] = i;
+for (let i = 0, l = 18; i < l; i++) {
+    days[i] = i + 1;
 }
 
 const defaultDays = days.map(day => {

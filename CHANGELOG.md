@@ -1,6 +1,9 @@
 ## 1.1.0
 - Can mark exercises as finished
 
+  ### 1.1.1
+  - Fix off by one error in days state
+
 ## 1.0.0
 - First release
 
