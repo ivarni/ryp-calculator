@@ -5,10 +5,5 @@
         ["babel-root-import", {
             "rootPathSuffix": "src"
         }]
-    ],
-    "env": {
-        "development": {
-            "presets": ["react-hmre"]
-        }
-    }
+    ]
 }
