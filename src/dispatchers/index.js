@@ -1,4 +1,4 @@
-import * as actions from '~/actions';
+import * as actions from '../actions';
 
 export const expandChange = field =>
     dispatch => dispatch(actions.expandChange(field));
