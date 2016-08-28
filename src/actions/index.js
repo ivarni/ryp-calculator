@@ -24,4 +24,4 @@ export const exerciseFinished = (day, name) => (
         day,
         name,
     }
-)
+);

@@ -17,8 +17,8 @@ const defaultDays = days.map(day => {
     }));
 });
 
-const updateExerciseValue = (state, action) => {
-    return days.map(day => {
+const updateExerciseValue = (state, action) =>
+    days.map(day => {
         const formula = formulas[day - 1];
         return defaultExercises.map(exercise => {
             let value = exercise.value;
@@ -33,10 +33,9 @@ const updateExerciseValue = (state, action) => {
             };
         });
     });
-}
 
-const updateExerciseLabel = (state, action) => {
-    return days.map(day => {
+const updateExerciseLabel = (state, action) =>
+    days.map(day => {
         const formula = formulas[day - 1];
         return defaultExercises.map(exercise => {
             let { label, notes } = exercise;
@@ -52,22 +51,22 @@ const updateExerciseLabel = (state, action) => {
                 sets: formula.sets[exercise.name],
             };
         });
-    })
-}
+    });
 
-const exerciseFinished = (state, action) => {
-    return state.map((day, index) => {
+const exerciseFinished = (state, action) =>
+    state.map((day, index) => {
+        let newDay;
         if (action.day === index) {
-            day = day.map(exercise => {
+            newDay = day.map(exercise => {
+                const newExercise = { ...exercise };
                 if (exercise.name === action.name) {
-                    exercise.finished = true;
+                    newExercise.finished = true;
                 }
-                return exercise;
-            })
+                return newExercise;
+            });
         }
-        return day;
-    })
-}
+        return newDay;
+    });
 
 export default (state = defaultDays, action) => {
     switch (action.type) {
