@@ -10,7 +10,9 @@
     "dist:watch": "babel -d lib/. --ignore test/ src/ --watch",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "prepublish": "npm run dist"
+    "prepublish": "npm run dist",
+    "test": "tape -r babel-register test/**/*.js | faucet",
+    "test:watch": "tape-watch -r babel-register test/**/*.js | faucet"
   },
   "repository": {
     "type": "git",
@@ -31,7 +33,10 @@
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.2.0",
-    "eslint-plugin-react": "^6.1.2"
+    "eslint-plugin-react": "^6.1.2",
+    "faucet": "0.0.1",
+    "tape": "^4.6.0",
+    "tape-watch": "^2.2.3"
   },
   "dependencies": {
     "babel-plugin-transform-async-to-generator": "^6.8.0",
