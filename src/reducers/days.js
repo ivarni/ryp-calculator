@@ -18,38 +18,36 @@ const defaultDays = days.map(day => {
 });
 
 const updateExerciseValue = (state, action) =>
-    days.map(day => {
-        const formula = formulas[day - 1];
-        return defaultExercises.map(exercise => {
-            let value = exercise.value;
+    state.map((day, i) => {
+        const formula = formulas[i];
+        return day.map(exercise => {
             if (exercise.name === action.field) {
-                value = action.value;
+                return {
+                    ...exercise,
+                    title: formula.title,
+                    value: (action.value * formula.multiplier).toFixed(1),
+                    sets: formula.sets[exercise.name],
+                };
             }
-            return {
-                ...exercise,
-                title: formula.title,
-                value: (value * formula.multiplier).toFixed(1),
-                sets: formula.sets[exercise.name],
-            };
+            return exercise;
         });
     });
 
 const updateExerciseLabel = (state, action) =>
-    days.map(day => {
-        const formula = formulas[day - 1];
-        return defaultExercises.map(exercise => {
+    state.map((day, i) => {
+        const formula = formulas[i];
+        return day.map(exercise => {
             let { label, notes } = exercise;
             if (exercise.name === action.field) {
                 label = action.value;
                 notes = action.notes;
+                return {
+                    ...exercise,
+                    notes: action.notes,
+                    label: action.value,
+                };
             }
-            return {
-                ...exercise,
-                notes,
-                label,
-                value: (exercise.value * formula.multiplier).toFixed(1),
-                sets: formula.sets[exercise.name],
-            };
+            return exercise;
         });
     });
 
