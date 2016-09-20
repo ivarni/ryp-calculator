@@ -53,9 +53,8 @@ const updateExerciseLabel = (state, action) =>
 
 const exerciseFinished = (state, action) =>
     state.map((day, index) => {
-        let newDay;
         if (action.day === index) {
-            newDay = day.map(exercise => {
+            return day.map(exercise => {
                 const newExercise = { ...exercise };
                 if (exercise.name === action.name) {
                     newExercise.finished = true;
@@ -63,7 +62,7 @@ const exerciseFinished = (state, action) =>
                 return newExercise;
             });
         }
-        return newDay;
+        return day;
     });
 
 export default (state = defaultDays, action) => {
