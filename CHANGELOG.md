@@ -7,6 +7,9 @@
   ### 1.1.2
   - Bugfix: No longer resets all other exercises when editing
 
+  ### 1.1.3
+  - Bugfix: Fix crash when marking exercise complete
+
 ## 1.0.0
 - First release
 
