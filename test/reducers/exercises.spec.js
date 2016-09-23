@@ -32,7 +32,6 @@ describe('exercises reducer', () => {
 
             const row = state.find(e => e.name === 'row');
             const squats = state.find(e => e.name === 'squats');
-
             expect(row.label).to.equal('Stående roing');
             expect(row.notes).to.equal('Stang');
             expect(squats.label).to.equal('Knebøy');
@@ -63,7 +62,7 @@ describe('exercises reducer', () => {
 
             const unique = new Set(state2.map(s => s.name));
 
-            expect(unique.size).to.equal(state2.length);
+            expect(unique.size).to.equal(state2.size);
         });
     });
 });

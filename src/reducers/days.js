@@ -1,3 +1,5 @@
+import Immutable from 'immutable';
+
 import * as actions from '../actions';
 import { defaultExercises } from './exercises';
 import formulas from '../formula';
@@ -9,27 +11,25 @@ for (let i = 0, l = 18; i < l; i++) {
 
 let customCounter = 1;
 
-export const defaultDays = days.map((day) => {
+export const defaultDays = Immutable.List.of(...days.map((day) => {
     const formula = formulas[day - 1];
-    return defaultExercises.map(exercise => ({
-        ...exercise,
+    return defaultExercises.map(exercise => exercise.merge({
         title: formula.title,
         value: (exercise.value * formula.multiplier).toFixed(1),
         sets: formula.sets[exercise.name],
     }));
-});
+}));
 
 const updateExerciseValue = (state, action) =>
     state.map((day, i) => {
         const formula = formulas[i];
         return day.map((exercise) => {
             if (exercise.name === action.field) {
-                return {
-                    ...exercise,
+                return exercise.merge({
                     title: formula.title,
                     value: (action.value * formula.multiplier).toFixed(1),
                     sets: formula.sets[exercise.name],
-                };
+                });
             }
             return exercise;
         });
@@ -39,11 +39,10 @@ const updateExerciseLabel = (state, action) =>
     state.map(day =>
         day.map((exercise) => {
             if (exercise.name === action.field) {
-                return {
-                    ...exercise,
-                    notes: action.notes,
+                return exercise.merge({
                     label: action.value,
-                };
+                    notes: action.notes,
+                });
             }
             return exercise;
         })
@@ -53,11 +52,10 @@ const exerciseFinished = (state, action) =>
     state.map((day, index) => {
         if (action.day === index) {
             return day.map((exercise) => {
-                const newExercise = { ...exercise };
                 if (exercise.name === action.name) {
-                    newExercise.finished = true;
+                    return exercise.set('finished', true);
                 }
-                return newExercise;
+                return exercise;
             });
         }
         return day;
