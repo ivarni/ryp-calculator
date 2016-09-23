@@ -3,3 +3,4 @@ ryp-calculator.sublime-workspace
 npm-debug.log*
 .nyc_output/
 coverage/
+lib/
