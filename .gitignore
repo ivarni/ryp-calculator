@@ -1,3 +1,5 @@
 node_modules/
 ryp-calculator.sublime-workspace
 npm-debug.log*
+.nyc_output/
+coverage/
