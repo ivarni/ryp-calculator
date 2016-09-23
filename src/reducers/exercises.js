@@ -55,7 +55,7 @@ export const defaultExercises = [
 let customCounter = 1;
 
 const updateExerciseValue = (state, { field, value }) =>
-    state.map(exercise => {
+    state.map((exercise) => {
         if (exercise.name === field) {
             return { ...exercise, value };
         }
@@ -63,7 +63,7 @@ const updateExerciseValue = (state, { field, value }) =>
     });
 
 const updateExerciseLabel = (state, { field, value, notes }) =>
-    state.map(exercise => {
+    state.map((exercise) => {
         if (exercise.name === field) {
             return {
                 ...exercise,
