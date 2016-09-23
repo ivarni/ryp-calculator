@@ -52,29 +52,37 @@ export const defaultExercises = [
     },
 ];
 
-const updateExerciseValue = (state, action) => {
-    const nextState = Array.from(state);
-    return nextState.map(exercise => {
-        if (exercise.name === action.field) {
-            return { ...exercise, value: action.value };
+let customCounter = 1;
+
+const updateExerciseValue = (state, { field, value }) =>
+    state.map(exercise => {
+        if (exercise.name === field) {
+            return { ...exercise, value };
         }
         return exercise;
     });
-};
 
-const updateExerciseLabel = (state, action) => {
-    const nextState = Array.from(state);
-    return nextState.map(exercise => {
-        if (exercise.name === action.field) {
+const updateExerciseLabel = (state, { field, value, notes }) =>
+    state.map(exercise => {
+        if (exercise.name === field) {
             return {
                 ...exercise,
-                label: action.value,
-                notes: action.notes,
+                label: value,
+                notes,
             };
         }
         return exercise;
     });
-};
+
+const addExercise = (state, { label, value, notes }) =>
+    state.concat({
+        name: `custom_${customCounter++}`,
+        notes,
+        label,
+        value,
+        finished: false,
+    });
+
 
 export default (state = defaultExercises, action) => {
     switch (action.type) {
@@ -82,6 +90,8 @@ export default (state = defaultExercises, action) => {
             return updateExerciseValue(state, action);
         case actions.LABEL_CHANGE:
             return updateExerciseLabel(state, action);
+        case actions.ADD_EXERCISE:
+            return addExercise(state, action);
         default:
             return state;
     }

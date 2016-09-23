@@ -7,6 +7,8 @@ for (let i = 0, l = 18; i < l; i++) {
     days[i] = i + 1;
 }
 
+let customCounter = 1;
+
 export const defaultDays = days.map(day => {
     const formula = formulas[day - 1];
     return defaultExercises.map(exercise => ({
@@ -61,6 +63,22 @@ const exerciseFinished = (state, action) =>
         return day;
     });
 
+const addExercise = (state, { label, value, notes }) => {
+    const name = `custom_${customCounter++}`;
+
+    return state.map((day, idx) => {
+        const formula = formulas[idx];
+
+        return day.concat({
+            name,
+            notes,
+            label,
+            value: (value * formula.multiplier).toFixed(1),
+            finished: false,
+        });
+    });
+};
+
 export default (state = defaultDays, action) => {
     switch (action.type) {
         case actions.FIELD_CHANGE:
@@ -69,6 +87,8 @@ export default (state = defaultDays, action) => {
             return updateExerciseLabel(state, action);
         case actions.EXERCISE_FINISHED:
             return exerciseFinished(state, action);
+        case actions.ADD_EXERCISE:
+            return addExercise(state, action);
         default:
             return state;
     }
