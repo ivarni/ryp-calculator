@@ -25,3 +25,13 @@ export const exerciseFinished = (day, name) => (
         name,
     }
 );
+
+export const ADD_EXERCISE = 'ADD_EXERCISE';
+export const addExercise = (label, value, notes) => (
+    {
+        type: ADD_EXERCISE,
+        label,
+        value,
+        notes,
+    }
+);

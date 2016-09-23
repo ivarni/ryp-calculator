@@ -1,3 +1,6 @@
+## 1.2.0
+- Support adding new exercises
+
 ## 1.1.0
 - Can mark exercises as finished
 
