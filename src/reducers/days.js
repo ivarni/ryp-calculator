@@ -7,7 +7,7 @@ for (let i = 0, l = 18; i < l; i++) {
     days[i] = i + 1;
 }
 
-const defaultDays = days.map(day => {
+export const defaultDays = days.map(day => {
     const formula = formulas[day - 1];
     return defaultExercises.map(exercise => ({
         ...exercise,
@@ -34,13 +34,9 @@ const updateExerciseValue = (state, action) =>
     });
 
 const updateExerciseLabel = (state, action) =>
-    state.map((day, i) => {
-        const formula = formulas[i];
-        return day.map(exercise => {
-            let { label, notes } = exercise;
+    state.map(day =>
+        day.map(exercise => {
             if (exercise.name === action.field) {
-                label = action.value;
-                notes = action.notes;
                 return {
                     ...exercise,
                     notes: action.notes,
@@ -48,8 +44,8 @@ const updateExerciseLabel = (state, action) =>
                 };
             }
             return exercise;
-        });
-    });
+        })
+    );
 
 const exerciseFinished = (state, action) =>
     state.map((day, index) => {
