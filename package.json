@@ -1,6 +1,6 @@
 {
   "name": "ryp-calculator",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Redux store, actions and reducers for a RYP calculator",
   "files": [
     "lib/"
@@ -51,6 +51,7 @@
   "dependencies": {
     "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "immutable": "^3.8.1",
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",

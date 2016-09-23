@@ -1,3 +1,6 @@
+## 2.0.0
+- Use [immutable.js](https://facebook.github.io/immutable-js/) instead of plain javascript objects. Potentially breaking change is that Arrays are now Lists and elements can't be read using `list[idx]`. The way to get an element out of an Immutable List is `list.get(idx)`.
+
 ## 1.2.0
 - Support adding new exercises
 

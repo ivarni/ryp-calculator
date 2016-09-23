@@ -20,7 +20,7 @@ describe('days reducer', () => {
             const action = exerciseFinished(5, 'triceps');
             const state = reducer(undefined, action);
 
-            const exercise = state[5].find(
+            const exercise = state.get(5).find(
                 e => e.name === 'triceps'
             );
 
@@ -31,7 +31,7 @@ describe('days reducer', () => {
             const action = exerciseFinished(5, 'triceps');
             const state = reducer(undefined, action);
 
-            const exercise = state[4].find(
+            const exercise = state.get(4).find(
                 e => e.name === 'triceps'
             );
 
@@ -55,7 +55,7 @@ describe('days reducer', () => {
 
                 const expectedValue = (20 * multiplier).toFixed(1);
 
-                expect(arnoldDays[idx].value).to.be(expectedValue);
+                expect(arnoldDays.get(idx).value).to.be(expectedValue);
             });
         });
 
@@ -68,11 +68,11 @@ describe('days reducer', () => {
             );
 
             bicepsDays.forEach((day, idx) => {
-                const expectedValue = defaultDays[idx].find(
+                const expectedValue = defaultDays.get(idx).find(
                     exercise => exercise.name === 'biceps'
                 ).value;
 
-                expect(bicepsDays[idx].value).to.be(expectedValue);
+                expect(bicepsDays.get(idx).value).to.be(expectedValue);
             });
         });
 
