@@ -8,7 +8,6 @@ import {
 } from '../../src/actions';
 
 describe('days reducer', () => {
-
     it('returns the default state', () => {
         const action = { type: 'UNKNOWN' };
         const state = reducer(undefined, action);
@@ -22,7 +21,7 @@ describe('days reducer', () => {
             const state = reducer(undefined, action);
 
             const exercise = state[5].find(
-                exercise => exercise.name === 'triceps'
+                e => e.name === 'triceps'
             );
 
             expect(exercise.finished).to.be(true);
@@ -33,7 +32,7 @@ describe('days reducer', () => {
             const state = reducer(undefined, action);
 
             const exercise = state[4].find(
-                exercise => exercise.name === 'triceps'
+                e => e.name === 'triceps'
             );
 
             expect(exercise.finished).to.be(false);
@@ -120,7 +119,7 @@ describe('days reducer', () => {
 
                 const expectedValue = (70 * multiplier).toFixed(1);
 
-                expect(exercise.label).to.equal('Markløft')
+                expect(exercise.label).to.equal('Markløft');
                 expect(exercise.value).to.equal(expectedValue);
                 expect(exercise.notes).to.equal('');
                 expect(exercise.finished).to.equal(false);

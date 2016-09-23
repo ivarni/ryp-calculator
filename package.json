@@ -8,8 +8,8 @@
   "scripts": {
     "dist": "babel -d lib/. --ignore test/ src/",
     "dist:watch": "babel -d lib/. --ignore test/ src/ --watch",
-    "lint": "eslint src",
-    "lint:fix": "eslint --fix src",
+    "lint": "eslint src test",
+    "lint:fix": "eslint --fix src test",
     "prepublish": "npm run dist",
     "test": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --compilers js:babel-core/register --require test/setup.js --recursive test",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --watch --compilers js:babel-core/register --require test/setup.js --recursive test",

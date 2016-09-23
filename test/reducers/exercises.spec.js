@@ -6,7 +6,6 @@ import {
 } from '../../src/actions';
 
 describe('exercises reducer', () => {
-
     it('returns the default state', () => {
         const action = { type: 'UNKNOWN' };
         const state = reducer(undefined, action);
@@ -56,15 +55,15 @@ describe('exercises reducer', () => {
         });
 
         it('gives each exercise a unique name', () => {
-            const action_1 = addExercise('Markløft', 70, 'stang');
-            const action_2 = addExercise('Benkpress', 60, 'stang');
+            const action1 = addExercise('Markløft', 70, 'stang');
+            const action2 = addExercise('Benkpress', 60, 'stang');
 
-            const state_1 = reducer(undefined, action_1);
-            const state_2 = reducer(state_1, action_2);
+            const state1 = reducer(undefined, action1);
+            const state2 = reducer(state1, action2);
 
-            const unique = new Set(state_2.map(s => s.name));
+            const unique = new Set(state2.map(s => s.name));
 
-            expect(unique.size).to.equal(state_2.length);
+            expect(unique.size).to.equal(state2.length);
         });
     });
 });
