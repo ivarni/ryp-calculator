@@ -35,3 +35,11 @@ export const addExercise = (label, value, notes) => (
         notes,
     }
 );
+
+export const EXERCISES_UPDATED = 'EXERCISES_UPDATED';
+export const exercisesUpdated = exercises => (
+    {
+        type: EXERCISES_UPDATED,
+        exercises,
+    }
+);

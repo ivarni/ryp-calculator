@@ -1,24 +1,21 @@
-import {
-    createStore,
-    applyMiddleware,
-    compose,
-} from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from '../reducers';
+import saga from '../reducers/sagas';
+import makeStore from './makeStore';
+
+export const sagaMiddleware = createSagaMiddleware();
+
+export const middlewares = [
+    thunk,
+    sagaMiddleware,
+    createLogger(),
+];
 
 export default function configureStore(preloadedState) {
-    const store = createStore(
-        rootReducer,
-        preloadedState,
-        compose(
-            applyMiddleware(
-                thunk,
-                createLogger()
-            )
-        )
-    );
+    const store = makeStore(middlewares, preloadedState);
+    sagaMiddleware.run(saga);
 
     if (module.hot) {
         module.hot.accept('../reducers', () => {
