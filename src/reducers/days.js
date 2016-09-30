@@ -77,6 +77,17 @@ const addExercise = (state, { label, value, notes }) => {
     });
 };
 
+const updateDays = (state, action) =>
+    state.map((day, dayIdx) => {
+        const formula = formulas[dayIdx];
+        return action.exercises.map((exercise, exerciseIdx) =>
+            exercise.merge({
+                value: (exercise.value * formula.multiplier).toFixed(1),
+                finished: (day.get(exerciseIdx) || {}).finished,
+            })
+        );
+    });
+
 export default (state = defaultDays, action) => {
     switch (action.type) {
         case actions.FIELD_CHANGE:
@@ -87,6 +98,8 @@ export default (state = defaultDays, action) => {
             return exerciseFinished(state, action);
         case actions.ADD_EXERCISE:
             return addExercise(state, action);
+        case actions.EXERCISES_UPDATED:
+            return updateDays(state, action);
         default:
             return state;
     }
