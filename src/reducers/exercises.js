@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 import * as actions from '../actions';
 
 /* eslint-disable new-cap */
-const ExerciseRecord = Immutable.Record({
+export const ExerciseRecord = Immutable.Record({
     name: null,
     notes: null,
     label: null,
@@ -88,14 +88,13 @@ const updateExerciseLabel = (state, { field, value, notes }) =>
     });
 
 const addExercise = (state, { label, value, notes }) =>
-    state.concat({
+    state.push(new ExerciseRecord({
         name: `custom_${customCounter++}`,
         notes,
         label,
         value,
         finished: false,
-    });
-
+    }));
 
 export default (state = defaultExercises, action) => {
     switch (action.type) {

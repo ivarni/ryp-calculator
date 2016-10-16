@@ -1,10 +1,9 @@
 import reducer, { defaultDays } from '../../src/reducers/days';
+import { ExerciseRecord, defaultExercises } from '../../src/reducers/exercises';
 import formula from '../../src/formula';
 import {
-    addExercise,
     exerciseFinished,
-    fieldChange,
-    labelChange,
+    exercisesUpdated,
 } from '../../src/actions';
 
 describe('days reducer', () => {
@@ -39,104 +38,62 @@ describe('days reducer', () => {
         });
     });
 
-    describe('when updating', () => {
-        it('updates all days when a value is changed', () => {
-            const action = fieldChange('arnold', 20);
-            const state = reducer(undefined, action);
+    describe('when adding an exercise', () => {
+        it('adds the new exercise', () => {
+            const newExercises = defaultExercises.push(new ExerciseRecord({
+                name: 'custom_1',
+                notes: '',
+                label: 'Utfall',
+                value: 10,
+                finished: false,
+            }));
+            const action = exercisesUpdated(newExercises);
+            const state = reducer(defaultDays, action);
+            const day0 = state.get(0);
+            const newExercise = day0.get(day0.size - 1);
+            const multiplier = formula[0].multiplier;
 
-            const arnoldDays = state.map(day =>
-                day.find(exercise => exercise.name === 'arnold')
-            );
-
-            arnoldDays.forEach((day, idx) => {
-                const multiplier = formula.find(
-                    f => f.day === idx + 1
-                ).multiplier;
-
-                const expectedValue = (20 * multiplier).toFixed(1);
-
-                expect(arnoldDays.get(idx).value).to.be(expectedValue);
-            });
-        });
-
-        it('does not update values for other exercises', () => {
-            const action = fieldChange('arnold', 20);
-            const state = reducer(undefined, action);
-
-            const bicepsDays = state.map(day =>
-                day.find(exercise => exercise.name === 'biceps')
-            );
-
-            bicepsDays.forEach((day, idx) => {
-                const expectedValue = defaultDays.get(idx).find(
-                    exercise => exercise.name === 'biceps'
-                ).value;
-
-                expect(bicepsDays.get(idx).value).to.be(expectedValue);
-            });
-        });
-
-        it('updates all days when a label is changed', () => {
-            const action = labelChange('abs', 'Crunch');
-            const state = reducer(undefined, action);
-
-            const absDays = state.map(day =>
-                day.find(exercise => exercise.name === 'abs')
-            );
-
-            absDays.forEach(exercise =>
-                expect(exercise.label).to.equal('Crunch')
-            );
-        });
-
-        it('does not update labels for other exercises', () => {
-            const action = labelChange('abs', 'Crunch');
-            const state = reducer(undefined, action);
-
-            const squatDays = state.map(day =>
-                day.find(exercise => exercise.name === 'squats')
-            );
-
-            squatDays.forEach(exercise =>
-                expect(exercise.label).to.equal('Knebøy')
-            );
+            expect(newExercise.name).to.equal('custom_1');
+            expect(newExercise.label).to.equal('Utfall');
+            expect(newExercise.value).to.be((10 * multiplier).toFixed(1));
         });
     });
 
-    describe('When adding exercises', () => {
-        it('adds the new exercise to every day', () => {
-            const action = addExercise('Markløft', 70, '');
-            const state = reducer(undefined, action);
+    describe('when updating', () => {
+        it('recalculates a value', () => {
+            const newExercises = defaultExercises.update(0, item => item.set('value', 100));
+            const action = exercisesUpdated(newExercises);
+            const state = reducer(defaultDays, action);
 
-            const deadliftDays = state.map(day =>
-                day.find(exercise => exercise.label === 'Markløft')
-            );
+            const day = state.get(0);
+            const exerciseDay = day.get(0);
+            const multiplier = formula[0].multiplier;
 
-            deadliftDays.forEach((exercise, idx) => {
-                const multiplier = formula.find(
-                    f => f.day === idx + 1
-                ).multiplier;
-
-                const expectedValue = (70 * multiplier).toFixed(1);
-
-                expect(exercise.label).to.equal('Markløft');
-                expect(exercise.value).to.equal(expectedValue);
-                expect(exercise.notes).to.equal('');
-                expect(exercise.finished).to.equal(false);
-            });
+            expect(exerciseDay.value).to.be((100 * multiplier).toFixed(1));
         });
 
-        it('uses the same name for all the days', () => {
-            const action = addExercise('Markløft', 70, '');
-            const state = reducer(undefined, action);
+        it('sets a new label', () => {
+            const newExercises = defaultExercises.update(0, item => item.set('label', 'Markløft'));
+            const action = exercisesUpdated(newExercises);
+            const state = reducer(defaultDays, action);
 
-            const deadliftDays = state.map(day =>
-                day.find(exercise => exercise.label === 'Markløft')
+            const day = state.get(0);
+            const exerciseDay = day.get(0);
+
+            expect(exerciseDay.label).to.be('Markløft');
+        });
+
+        it('does not unmark an exercise marked as finished', () => {
+            const days = defaultDays.update(0, day =>
+                day.update(0, item => item.set('finished', true))
             );
+            const action = exercisesUpdated(defaultExercises);
+            const state = reducer(days, action);
 
-            const unique = new Set(deadliftDays.map(d => d.name));
+            const day = state.get(0);
+            const exerciseDay = day.get(0);
 
-            expect(unique.size).to.be(1);
+            expect(exerciseDay.finished).to.be(true);
         });
     });
 });
