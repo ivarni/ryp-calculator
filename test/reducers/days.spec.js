@@ -56,6 +56,7 @@ describe('days reducer', () => {
             expect(newExercise.name).to.equal('custom_1');
             expect(newExercise.label).to.equal('Utfall');
             expect(newExercise.value).to.be((10 * multiplier).toFixed(1));
+            expect(newExercise.sets).to.be(2);
         });
     });
 
@@ -70,6 +71,7 @@ describe('days reducer', () => {
             const multiplier = formula[0].multiplier;
 
             expect(exerciseDay.value).to.be((100 * multiplier).toFixed(1));
+            expect(exerciseDay.sets).to.be(3);
         });
 
         it('sets a new label', () => {
@@ -81,6 +83,7 @@ describe('days reducer', () => {
             const exerciseDay = day.get(0);
 
             expect(exerciseDay.label).to.be('Markløft');
+            expect(exerciseDay.sets).to.be(3);
         });
 
         it('does not unmark an exercise marked as finished', () => {

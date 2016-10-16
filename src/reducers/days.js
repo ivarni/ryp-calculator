@@ -38,6 +38,7 @@ const updateDays = (state, action) =>
             exercise.merge({
                 value: (exercise.value * formula.multiplier).toFixed(1),
                 finished: (day.get(exerciseIdx) || {}).finished,
+                sets: (day.get(exerciseIdx) || {}).sets || 2,
             })
         );
     });

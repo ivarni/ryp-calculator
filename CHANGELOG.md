@@ -7,6 +7,9 @@
   ### 2.0.2
   - Bugfixes
 
+  ### 2.0.3
+  - Keep number of sets when updating days
+
 ## 1.2.0
 - Support adding new exercises
 
