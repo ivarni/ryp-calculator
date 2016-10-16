@@ -6,8 +6,10 @@ import configureStore, {
 } from '../../src/store/configureStore.prod';
 import {
     fieldChange,
-    FIELD_CHANGE,
+    labelChange,
     EXERCISES_UPDATED,
+    FIELD_CHANGE,
+    LABEL_CHANGE,
 } from '../../src/actions';
 
 describe('prod store integration test', () => {
@@ -45,6 +47,13 @@ describe('store sagas', () => {
         store.dispatch(fieldChange('squats', 90));
 
         expect(actions[0].type).to.equal(FIELD_CHANGE);
+        expect(actions[1].type).to.equal(EXERCISES_UPDATED);
+    });
+
+    it('dispatches an action when a label is changed', () => {
+        store.dispatch(labelChange('squats', 'Markløft', 'unit-test'));
+
+        expect(actions[0].type).to.equal(LABEL_CHANGE);
         expect(actions[1].type).to.equal(EXERCISES_UPDATED);
     });
 });

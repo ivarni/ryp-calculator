@@ -4,6 +4,9 @@
   ### 2.0.1
   - Internal rewrite using [redux-saga](https://github.com/yelouafi/redux-saga)
 
+  ### 2.0.2
+  - Bugfixes
+
 ## 1.2.0
 - Support adding new exercises
 
