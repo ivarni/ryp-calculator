@@ -43,3 +43,11 @@ export const exercisesUpdated = exercises => (
         exercises,
     }
 );
+
+export const HYDRATE_STORE = 'HYDRATE_STORE';
+export const hydrateStore = preloadedState => (
+    {
+        type: HYDRATE_STORE,
+        preloadedState,
+    }
+);

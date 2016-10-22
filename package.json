@@ -1,6 +1,6 @@
 {
   "name": "ryp-calculator",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Redux store, actions and reducers for a RYP calculator",
   "files": [
     "lib/"

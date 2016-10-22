@@ -39,9 +39,27 @@ const updateDays = (state, action) =>
                 value: (exercise.value * formula.multiplier).toFixed(1),
                 finished: (day.get(exerciseIdx) || {}).finished,
                 sets: (day.get(exerciseIdx) || {}).sets || 2,
+                title: formula.title,
             })
         );
     });
+
+const hydrate = (state, { preloadedState }) =>
+    Immutable.List.of(...days.map((day) => {
+        const newDay = preloadedState.days[day - 1];
+        return defaultExercises.map((exercise) => {
+            const newExercise = newDay.find(e => e.name === exercise.name);
+            return exercise.merge({
+                value: newExercise.value,
+                name: newExercise.name,
+                notes: newExercise.notes,
+                label: newExercise.label,
+                finished: newExercise.finished,
+                sets: newExercise.sets,
+                title: newExercise.title,
+            });
+        });
+    }));
 
 export default (state = defaultDays, action) => {
     switch (action.type) {
@@ -49,6 +67,8 @@ export default (state = defaultDays, action) => {
             return exerciseFinished(state, action);
         case actions.EXERCISES_UPDATED:
             return updateDays(state, action);
+        case actions.HYDRATE_STORE:
+            return hydrate(state, action);
         default:
             return state;
     }

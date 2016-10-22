@@ -4,7 +4,10 @@ import formula from '../../src/formula';
 import {
     exerciseFinished,
     exercisesUpdated,
+    hydrateStore,
 } from '../../src/actions';
+
+import preloadedState from '../fixtures/preloadedState.json';
 
 describe('days reducer', () => {
     it('returns the default state', () => {
@@ -97,6 +100,38 @@ describe('days reducer', () => {
             const exerciseDay = day.get(0);
 
             expect(exerciseDay.finished).to.be(true);
+        });
+
+        it('does not override the exercise title', () => {
+            const action = exercisesUpdated(defaultExercises);
+            const state = reducer(defaultDays, action);
+
+            const defaultDay = defaultDays.get(0);
+            const day = state.get(0);
+
+            expect(day.get(0).title).to.equal(defaultDay.get(0).title);
+        });
+    });
+
+    describe('When hydrating the store', () => {
+        it('updates the state', () => {
+            const action = hydrateStore(preloadedState);
+
+            const state = reducer(defaultDays, action);
+
+            preloadedState.days.forEach((newDay, idx) => {
+                const day = state.get(idx);
+                newDay.forEach((newExerciseDay) => {
+                    const exerciseDay = day.find(e => e.name === newExerciseDay.name);
+                    expect(exerciseDay.value).to.be(newExerciseDay.value);
+                    expect(exerciseDay.name).to.be(newExerciseDay.name);
+                    expect(exerciseDay.notes).to.be(newExerciseDay.notes);
+                    expect(exerciseDay.label).to.be(newExerciseDay.label);
+                    expect(exerciseDay.finished).to.be(newExerciseDay.finished);
+                    expect(exerciseDay.sets).to.be(newExerciseDay.sets);
+                    expect(exerciseDay.title).to.be(newExerciseDay.title);
+                });
+            });
         });
     });
 });
