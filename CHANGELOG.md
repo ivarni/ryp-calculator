@@ -1,3 +1,7 @@
+## 2.1.0
+- New action/reducer pair `hydrateState` for preloading the state with a given day/exercise structure
+- Bugfix for an exercise title that went missing during updates
+
 ## 2.0.0
 - Use [immutable.js](https://facebook.github.io/immutable-js/) instead of plain javascript objects. Potentially breaking change is that Arrays are now Lists and elements can't be read using `list[idx]`. The way to get an element out of an Immutable List is `list.get(idx)`.
 

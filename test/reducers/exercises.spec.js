@@ -2,8 +2,11 @@ import reducer, { defaultExercises } from '../../src/reducers/exercises';
 import {
     addExercise,
     fieldChange,
+    hydrateStore,
     labelChange,
 } from '../../src/actions';
+
+import preloadedState from '../fixtures/preloadedState.json';
 
 describe('exercises reducer', () => {
     it('returns the default state', () => {
@@ -37,6 +40,19 @@ describe('exercises reducer', () => {
             expect(squats.label).to.equal('Knebøy');
             expect(squats.notes).to.equal('');
         });
+
+        it('does not touch the exercise title', () => {
+            const action = fieldChange('squats', 42);
+            const defaultWithTitles = defaultExercises.map(d => d.merge({
+                title: 'Should find another place to keep this',
+            }));
+            const state = reducer(defaultWithTitles, action);
+
+            const squats = state.find(e => e.name === 'squats');
+
+            expect(squats.value).to.be(42);
+            expect(squats.title).to.be('Should find another place to keep this');
+        });
     });
 
     describe('When adding exercises', () => {
@@ -63,6 +79,24 @@ describe('exercises reducer', () => {
             const unique = new Set(state2.map(s => s.name));
 
             expect(unique.size).to.equal(state2.size);
+        });
+    });
+
+    describe('When hydrating the store', () => {
+        it('updates the state', () => {
+            const action = hydrateStore(preloadedState);
+
+            const state = reducer(defaultExercises, action);
+
+            preloadedState.exercises.forEach((newExercise) => {
+                const exercise = state.find(e => e.name === newExercise.name);
+
+                expect(exercise.value).to.be(newExercise.value);
+                expect(exercise.name).to.be(newExercise.name);
+                expect(exercise.notes).to.be(newExercise.notes);
+                expect(exercise.label).to.be(newExercise.label);
+                expect(exercise.finished).to.be(newExercise.finished);
+            });
         });
     });
 });

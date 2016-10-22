@@ -96,6 +96,18 @@ const addExercise = (state, { label, value, notes }) =>
         finished: false,
     }));
 
+const hydrate = (state, { preloadedState }) => {
+    const newExercises = preloadedState.exercises.map(e =>
+        new ExerciseRecord({
+            name: e.name,
+            notes: e.notes,
+            label: e.label,
+            value: e.value,
+            finished: false,
+        }));
+    return Immutable.List.of(...newExercises);
+};
+
 export default (state = defaultExercises, action) => {
     switch (action.type) {
         case actions.FIELD_CHANGE:
@@ -104,6 +116,8 @@ export default (state = defaultExercises, action) => {
             return updateExerciseLabel(state, action);
         case actions.ADD_EXERCISE:
             return addExercise(state, action);
+        case actions.HYDRATE_STORE:
+            return hydrate(state, action);
         default:
             return state;
     }

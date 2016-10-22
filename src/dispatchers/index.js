@@ -11,3 +11,6 @@ export const labelChange = (field, value, notes) =>
 
 export const onFinished = (day, name) =>
     dispatch => dispatch(actions.exerciseFinished(day, name));
+
+export const hydrateStore = preloadedState =>
+    dispatch => dispatch(actions.hydrateStore(preloadedState));
