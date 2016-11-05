@@ -7,6 +7,7 @@ import configureStore, {
 import {
     fieldChange,
     labelChange,
+    setUserData,
     EXERCISES_UPDATED,
     FIELD_CHANGE,
     LABEL_CHANGE,
@@ -26,6 +27,15 @@ describe('prod store integration test', () => {
             expect(newState).to.not.eql(state);
         });
         store.dispatch(fieldChange('squats', 90));
+    });
+
+    it('Sets user data', () => {
+        const state = store.getState();
+        store.subscribe(() => {
+            const newState = store.getState();
+            expect(newState).to.not.eql(state);
+        });
+        store.dispatch(setUserData('Foo', '123'));
     });
 });
 
