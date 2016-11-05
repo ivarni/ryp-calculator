@@ -1,3 +1,6 @@
+## 2.2.0
+- New action/reducer pair `setUserData` for putting user data into state
+
 ## 2.1.0
 - New action/reducer pair `hydrateState` for preloading the state with a given day/exercise structure
 - Bugfix for an exercise title that went missing during updates
